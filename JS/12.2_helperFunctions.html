@@ -1,0 +1,84 @@
+<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loops</title>
+</head>
+<body>
+     <h3>Helper Functions</h3>
+     <script>
+      console.warn('The Iterator.from() creates an iterator object from an existing iterable or iterator object.');
+
+      const arr = [1,2,3,4,5,6,7];
+      const itt = Iterator.from([1,2,3,4]);
+      for(const ite of itt){
+        console.log(ite);
+      }
+
+      console.warn('The filter() method returns a new iterator containing elements that satisfy a filter function.');
+        const fil = arr.filter(x => x % 2 === 0);
+        for (const fe of fil) { 
+            console.log(fe);
+        }
+
+      console.warn('The map() method returns a new iterator with all elements transformed by a map function.');
+      const mapp =arr.map(x=>x*2);
+      for (const m of mapp)
+        console.log(m);
+
+    console.log('The flatMap() method returns a new iterator by mapping each element and then flattening the results into a single iterator.');
+      const flatMap = arr.flatMap(x=>[x,x*3]); //previous value, new value, previous value, new value...
+      for(const fm of flatMap)
+        console.log(fm);
+
+
+    console.warn('The take() method returns a new iterator that yields at most a specified number of elements.');
+     const myIterator = Iterator.from([1, 2, 3, 4, 5, 6]);
+    const firstFive = myIterator.take(2);
+    for (const x of firstFive) {
+      console.log(x);
+    }
+
+    console.warn('The drop() method returns a new iterator that skips a specified number of elements before yielding the rest.');
+    const dropIt = Iterator.from([1,2,3,4,5]);
+    const newIt = dropIt.drop(2);
+    for(nie of newIt)
+      console.log(nie);
+
+    console.warn('The find(fn) method returns the first element that satisfies a test function');
+    const findIt = Iterator.from([3,4,3,5,2,5]);
+    const fIt= findIt.find(x=>x==2);
+    console.log(fIt); // find() takes method and doesn't return itterable
+
+    console.warn('The reduce() method applies a reducer function against an accumulator and each element to reduce it to a single value.');
+    const red = Iterator.from([1,4,5,7,8]);
+    const redI = red.reduce((x,y)=> {
+       return x+y;}
+    );
+    console.log(redI);
+
+    console.warn('The every(fn) method returns true if all elements in the iterator satisfy the provided test function.');
+    const evr = Iterator.from([1,4,3,6,7]);
+    const evI = evr.every(x=>x>=1); //checks for every element satisfies this, then is true.
+      console.log(evI);
+
+    console.warn('The some() method returns true if at least one element in the iterator satisfies the provided test function.');
+    const sm = Iterator.from([1,2,3,4,5]);
+    const smI = sm.some(x=>x>4); // even if some elements satisfy this, it will return true.
+    console.log(smI);
+
+    console.warn('The forEach() method executes a provided function once for each element in the iterator.');
+    const fe = Iterator.from("123456");
+    let text = "";
+    result=[];
+    fe.forEach (x => {
+        if (x > 2) {
+          result.push(x);
+        }
+      });
+      console.log(result);
+    </script>
+</body>
+</html>

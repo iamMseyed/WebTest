@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import {schoolJson} from "./29_jsonSeperateObject.js";
+        console.log(`In other module`);
+        console.log(`Value of text is ${schoolJson}`);
+        const jsonLength = schoolJson.schoolObject.length;
+        const arr = [];
+
+        for(let i =0;i<jsonLength;i++){
+            arr.push(schoolJson.schoolObject[i]);
+        }
+        let j =0;        
+        for(let i = 0; i<arr.length;i++){
+            console.log(`
+            "for ${j+1}-Array->"
+                school name is :${arr[i].schoolName}
+                school Age is ${arr[i].schoolAge}
+                school Location is ${arr[i].schoolLocation}
+            `)
+            j++;
+        }
+        
+    </script>
+</body>
+</html>

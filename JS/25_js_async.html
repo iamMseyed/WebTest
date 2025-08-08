@@ -1,0 +1,146 @@
+<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async</title>
+
+</head>
+<body>
+    <h4>Check Console</h4>
+
+    <script>
+        console.log(`
+        -- Callbacks --
+        Using setTimeOut, data will appear after some time
+        `);
+  /*      
+        console.warn('Without Callback');
+        const posts = [
+            {title:'Title One', body:'Body One'},
+            {title:'Title Two', body:'Body Two'}
+        ];
+
+        function getPosts (){  
+            setTimeout( () => {
+                posts.forEach((post)=>{
+                    console.log(post.title);
+                });
+            },2000);
+        }
+        
+        function createPost(post){
+            console.log(post.title);
+        }
+        
+        createPost({title:'Title Three', body:'Body Three'});
+        getPosts();
+*/
+        // comment other code before checking this to get clear results.
+  /*       
+        console.warn('With CallBack');
+
+        const posts = [
+            {title:'Title One', body:'Body One'},
+            {title:'Title Two', body:'Body Two'}
+        ];
+
+        function getPosts1(){
+            setTimeout(()=>{
+                posts.forEach((post)=>{
+                    console.log(post.title);
+                });
+            },2000);
+        }
+
+        function createPost1(post,callback){
+            setTimeout(()=>{
+                posts.push(post);
+                callback();
+            },2000);
+        }
+
+        createPost1({title:'Title Three', body:'Body Three'},getPosts1);
+ */
+ /*
+ console.log('-- Promises -- ');
+
+        const posts = [
+            {title:'Title One', body:'Body One'},
+            {title:'Title Two', body:'Body Two'}
+        ];
+
+          function getPosts1(){
+            setTimeout(()=>{
+                posts.forEach((post)=>{
+                    console.log(post.title);
+                });
+            },2000);
+        }
+
+        function createPost1(post){
+            return new Promise((resolve,reject)=>{
+                 setTimeout(()=>{
+                    posts.push(post);
+                    const error = false;
+                    if(!error)
+                        resolve();
+                    else
+                        reject('Error!'); // handle in .catch();
+
+                 },2000);
+            });
+        }
+
+        createPost1({title:'Title Three', body:'Body Three'})
+            .then(getPosts1)
+            .catch(err=>console.log('Error!!'));
+        
+        const promise1 = Promise.resolve('Hello World');
+        const promise2= 10;
+        const promise3= new Promise ((resolve, reject)=>{
+            setTimeout(resolve,2000,'Good Bye');
+        });
+
+        Promise.all([promise1,promise2,promise3]).then(values=>console.log(values));   
+ */
+        console.log('-- Ascyn / Await --');
+
+         const posts = [
+            {title:'Title One', body:'Body One'},
+            {title:'Title Two', body:'Body Two'}
+        ];
+
+        function createPost1(post){
+            return new Promise((resolve,reject)=>{
+                 setTimeout(()=>{
+                    posts.push(post);
+                    const error = false;
+                    if(!error)
+                        resolve();
+                    else
+                        reject('Error!'); // handle in .catch();
+
+                 },2000);
+            });
+        }
+
+        function getPosts (){  
+            setTimeout( () => {
+                posts.forEach((post)=>{
+                    console.log(post.title);
+                });
+            },2000);
+        }
+
+        async function init(){ //aync: makes a function return a promise
+            await createPost1({title:'Title Three', body:'Body Three'}); // await: makes a fucntion wait for a promise
+            getPosts();
+        }
+
+        init();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scope</title>
+    
+</head>
+<body>
+    --Check console for results--
+<script>
+   console.warn('--Scope--');
+   console.log(`Global Scope:
+    Variables declared outside any function or block are in the global scope.
+    Global variables are accessible from anywhere in the code.`);
+    var globalVar = "I'm a global variable";
+
+    function someFunction() {
+        console.log(globalVar); // logs "I'm a global variable"
+    }
+
+    someFunction();
+    console.log(globalVar); // logs "I'm a global variable"
+
+    console.log(`
+    Function Scope:
+    Any variable type declared within a function are scoped to that function.
+    They are not accessible outside the function.`);
+
+    function anotherFunction() {
+        let functionLet = "I'm a function let"; 
+        var functionVar = 'I am function with var';
+        const functionConst = 'I am function with const';
+        console.log(`functionLet ${functionLet}, functionVar ${functionVar}, functionConst ${functionConst}`); // logs "I'm a function variable"
+    }
+
+    anotherFunction();
+    // console.log(functionVar); // ReferenceError: functionVar is not defined
+  //  console.log(functionLet); // ReferenceError: functionLet is not defined
+  //  console.log(functionConst); // ReferenceError: functionConst is not defined
+
+    console.log(`
+    Block Scope:
+    Introduced with ES6, let and const allow block-scoped variables.
+    Variables declared using let or const inside a block 
+    (like an if statement or a loop) are only accessible within that block. But declaration with var have outside access`);
+
+    if (true) {
+        let blockLet = "I'm a block let ";
+        const blockConst = 'I am block const';
+        var blockVar = 'I am block var';
+        console.log(`blockVar:`,blockVar,`blockConst:`,blockConst,`blockLet:`,blockLet); // logs "I'm a block variable"
+    }
+
+    console.log(`var outside:`,blockVar,
+    //`const outside:`,blockConst,
+    //`blockLet outside:`,blockLet
+    );
+
+    console.log(`
+    Lexical Scope:
+    JavaScript uses lexical scoping, meaning that a function's scope is determined when it's defined, 
+    not when it's called. Inner functions have access to variables in their outer scope.`)
+    
+    function outerFunction() {
+        var outerVar = "I'm outside";
+        function innerFunction() {
+            console.log(outerVar); // logs "I'm outside"
+        }
+        innerFunction();
+    }
+    outerFunction();
+
+
+    console.log(`
+    Closures:
+    Closures occur when an inner function maintains access to its outer scope variables
+    even after the outer function has finished executing.`)
+    function closureTest() {
+        var closureVar = "Closure variable";
+        return function() {
+            console.log(closureVar); // logs "Closure variable"
+        }
+    }
+
+    var myClosure = closureTest();
+    myClosure();
+
+
+    console.warn('-- Hoisting --');
+    console.log(` --
+    In JavaScript, hoisting is a behavior in which variable and function declarations are moved 
+    to the top of their containing scope during compilation. This means you can use functions and
+    variables before you actually declare them in your code.`);
+
+    console.log(`--
+    var declarations are hoisted to the top of their containing function or global scope. 
+    However, the assignment is not hoisted.
+    `);
+    console.log(`...>`,xHoisted); 
+    var xHoisted = 10; 
+    console.log(`The declaration var xHoisted is hoisted, but the assignment xHoisted = 10 is not.`);
+
+    console.log(`-- 
+    Function declarations are fully hoisted, meaning both their signature and implementation are moved 
+    to the top of their containing scope.`);
+    console.log(foo()); // "Hello!"
+        function foo() {
+        return "Hello!";
+    };
+    console.log(`Here, the foo function is hoisted completely.`);
+
+    console.log(`--
+    let and const are not hoisted in the same way as var. They are hoisted to the top of their block scope
+    but are not initialized. This leads to a Temporal Dead Zone (TDZ) error if you try to access them 
+    before the declaration.`);
+    
+    console.log(y); // ReferenceError: Cannot access 'y' before initialization
+    console.log(xy);
+    let y = 10;
+    const xy = 20;
+
+    console.log(`--
+    Function expressions are not hoisted. Since they involve variable assignments, 
+    only the declaration of the variable is hoisted, not the assignment.`);
+
+    console.log(bar()); // TypeError: bar is not a function
+    var bar = function() {
+        return "Hi!";
+    };
+
+    console.log(`--
+    Arrow functions are treated similarly to function expressions. They are also not hoisted.
+  `);
+    console.log(baz()); // TypeError: baz is not a function
+    var baz = () => {
+        return "Hey!";
+    };
+</script>
+
+</body>
+</html>

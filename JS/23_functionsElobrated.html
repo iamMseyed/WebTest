@@ -1,0 +1,151 @@
+<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions Elobrated</title>
+</head>
+<body>
+    <h3>Check Console</h3>
+    <script>
+        function toBeCalled(){
+            console.log("this won't trigger automatically unless called");
+        }
+
+        (function notToBeCalled(){
+            console.log('This function will automatically be invoked!');
+        })();
+        (function (){
+            console.log('This autonomous function will be automatically invoked!');
+        })();
+        //toBeCalled();
+
+        function myFunction(a, b) {
+            return a * b;
+        }
+
+        let x = myFunction(4, 3) * 2;
+        console.log(x);
+
+        const y = ()=>{return x*2};
+        console.log(y);
+        console.log(y());
+
+        function sum(...args) {
+            let sum = 0;
+             for (let arg of args) 
+               sum += arg;
+            return sum;
+            }
+
+        console.log(sum(4, 9, 16, 25, 29, 100, 66, 77));
+
+        console.log('-- function call method --');
+
+        const obj1 = {
+            'name':'name1',
+            'age':'age1',
+            'gender':'gender1',
+            printFunction:function(){
+                console.log(`Name: is ${this.name}, age is ${this.age} and gender is ${this.gender}`);
+            }
+        }
+
+        const obj2={
+            'name':'name2',
+            'age':'age2',
+            'gender':'gender2'
+        }
+
+        obj1.printFunction();
+        obj1.printFunction.call(obj2);
+
+        /*
+            In obj1 we have printFuntion which prints the value, now in obj we have same set of variable names
+            but there isn't any function to print the same. Now we are using call() to call this method which
+            is availble in next method. Without recreating the function, we just used from other object's method
+        */
+
+        const obj3 = {
+            name:'anyName',
+            age:'anyAge',
+            gender:'anyClass',
+            print:function (newVar){
+                console.log(`Name is ${this.name}, Age is ${this.age} and class is ${this.gender}. Lets say new variable is ${newVar}`);
+            }
+        }
+
+        console.log(`-- Function bind() --`);
+         const obj31 = {
+            name:'anyName',
+            age:'anyAge',
+            gender:'anyClass',
+            printNew:function (newVar){
+                console.log(`Name is ${this.name}, Age is ${this.age} and class is ${this.gender}. Lets say new variable is ${newVar}`);
+            }
+        }
+
+         const obj21={
+            'name':'name2',
+            'age':'age2',
+            'gender':'gender2'
+        }
+
+        obj31.printNew.apply(obj21,['newVarArray']);
+
+         console.log(`-- Function bind() --`);
+         const obj30 = {
+            name:'anyName',
+            age:'anyAge',
+            gender:'anyClass',
+            printNew:function (newVar){
+                console.log(`Name is ${this.name}, Age is ${this.age} and class is ${this.gender}. Lets say new variable is ${newVar}`);
+            }
+        }
+
+         const obj20={
+            'name':'name2',
+            'age':'age2',
+            'gender':'gender2'
+        }
+
+        const newFun = obj31.printNew.bind(obj21,['newVarArray']); //array or var seperately
+        console.log(newFun());
+
+
+        console.log('-> function closure');
+
+
+        obj3.print.call(obj2,'newVarValue'); // calls print of obj3, and supplies newVarValue to newVar argument of obj3
+        /*
+        When you create a function that defines and returns another function, 
+        and the inner function has access to the variables of the outer function, 
+        it forms a closure. The inner function maintains a reference to the outer function's scope,
+        which allows it to access and modify the outer function's variables even after the outer function 
+        has finished executing.
+        */
+
+
+        
+        function createCounter() {
+            let count = 0; // Local variable in the scope of createCounter, called just once!
+            let cool = 0;
+             return function incrementCount() {
+                count += 1; // Increment the count
+                cool-=1;
+              //  return [count,cool]; // Return the new count as array
+                return {
+                    count:count,
+                    cool:cool
+                } // return as object
+            };
+        }
+
+        const counter = createCounter(); // counter is a closure capturing count variable
+        console.log(counter()); // Output: 1
+        console.log(counter()); // Output: 2
+        console.log(counter()); // Output: 3
+    </script>
+</body>
+</html>

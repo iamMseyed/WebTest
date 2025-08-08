@@ -1,0 +1,33 @@
+<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructuring</title>
+</head>
+<body>
+    <h2>Check console</h2>
+    
+    <script>
+        console.log(`
+        destructuring syntax allows you to extract values from objects and assign
+        them to variables with a shorthand notation`)
+        console.log('JS Object:');
+        const person = {
+            'name':'lkjfslja',
+            'age':30,
+            'address':'ldfajlk lkjsadflk'
+        };
+
+        let {hey, hi} = person; //nothing is extracted as hey and hi are not part of person object
+
+        let {name, address, newVar=20 }= person; // extracted name, address and created one more newVar. now can be accessed without object name
+        console.log(name) // extracted
+        console.log(hey, hi); // will be undefined
+        console.log(person.age);
+        console.log(person.age, address,name,newVar); // this will print exact 
+
+    </script>
+</body>
+</html>
